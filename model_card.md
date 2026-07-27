@@ -1,111 +1,125 @@
 # 🎧 Model Card: Music Recommender Simulation
 
-## 1. Model Name  
+## 1. Model Name
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
-
----
-
-## 2. Intended Use  
-
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**VibeFinder 1.0**
 
 ---
 
-## 3. How the Model Works  
+## 2. Intended Use
 
-Explain your scoring approach in simple language.  
+This recommender is designed to suggest songs based on a user's favorite genre, mood, and preferred energy level. It is intended as a classroom project to demonstrate how recommendation systems work.
 
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+The system assumes the user has a favorite genre, a favorite mood, and a preferred energy level. It is not designed for real-world music streaming services but instead serves as a simple educational simulation.
 
 ---
 
-## 4. Data  
+## 3. How the Model Works
 
-Describe the dataset the model uses.  
+The recommender compares every song in the dataset with the user's preferences.
 
-Prompts:  
+Each song contains information such as:
 
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+- Genre
+- Mood
+- Energy
+- Tempo
+- Valence
+- Danceability
+- Acousticness
 
----
+The user's profile stores:
 
-## 5. Strengths  
+- Favorite genre
+- Favorite mood
+- Preferred energy level
 
-Where does your system seem to work well  
+Each song receives points based on how closely it matches the user's preferences.
 
-Prompts:  
+Scoring rules:
 
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+- Genre match = +2 points
+- Mood match = +1 point
+- Energy similarity = up to +1 point
 
----
-
-## 6. Limitations and Bias 
-
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+After scoring every song, the songs are sorted from highest score to lowest score. The top five songs become the recommendations.
 
 ---
 
-## 7. Evaluation  
+## 4. Data
 
-How you checked whether the recommender behaved as expected. 
+The project uses a small CSV file containing songs with different genres and moods.
 
-Prompts:  
+Each song includes:
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
+- Title
+- Artist
+- Genre
+- Mood
+- Energy
+- Tempo
+- Valence
+- Danceability
+- Acousticness
 
-No need for numeric metrics unless you created some.
-
----
-
-## 8. Future Work  
-
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+The dataset is small and does not include listening history, lyrics, popularity, playlists, or user ratings.
 
 ---
 
-## 9. Personal Reflection  
+## 5. Strengths
 
-A few sentences about your experience.  
+The recommender performs well when the user's preferences closely match the available songs.
 
-Prompts:  
+It can quickly identify songs with matching genres, moods, and similar energy levels.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+For the default user profile, the recommendations matched expectations because songs with the correct genre and mood appeared near the top of the list.
+
+---
+
+## 6. Limitations and Bias
+
+The recommender only considers a few song features.
+
+It does not understand lyrics, artists, listening history, or changing user preferences.
+
+Because genre is worth more points than mood or energy, the recommender may favor songs from the same genre repeatedly. This can create a filter bubble where users receive similar recommendations every time.
+
+The small dataset also limits recommendation quality.
+
+---
+
+## 7. Evaluation
+
+I tested the recommender using several user profiles.
+
+- Happy Pop
+- Chill Lofi
+- High-Energy Rock
+
+I compared the recommended songs for each profile to see whether the rankings changed as expected.
+
+The biggest observation was that changing the preferred genre had the largest impact on the recommendations because genre received the highest weight.
+
+---
+
+## 8. Future Work
+
+Future improvements include:
+
+- Adding a much larger song dataset.
+- Using listening history.
+- Including artist preferences.
+- Considering popularity and release year.
+- Improving recommendation explanations.
+- Increasing diversity in the recommendation list.
+- Allowing users to change scoring weights.
+
+---
+
+## 9. Personal Reflection
+
+This project helped me understand how recommendation systems use simple data to make personalized suggestions. Even though the algorithm is simple, it can still produce recommendations that feel useful.
+
+Using AI tools helped me understand CSV processing, scoring logic, sorting, and recommendation algorithms. I also learned that AI-generated code should always be reviewed and tested before using it.
+
+The biggest lesson from this project was that recommendation quality depends heavily on both the scoring rules and the quality of the data. A better dataset usually leads to better recommendations.
